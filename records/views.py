@@ -53,3 +53,15 @@ def register_user(request):
 
     else:
         return render(request, 'signup.html', {'form': form})
+    
+
+
+# View single record
+def view_record(request, pk):
+    # Accessible to logged in users only
+    if request.user.is_authenticated:
+        record = Record.objects.get(id = pk)
+        return render(request, 'single_record.html', {"record": record})
+    else:
+        messages.success(request, "You must be logged in to view this page")
+        return redirect("home")
