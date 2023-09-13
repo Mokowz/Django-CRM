@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-from .forms import SignUpForm
+from .forms import SignUpForm, RecordForm
 from .models import Record
 
 # Create your views here.
@@ -62,6 +62,23 @@ def view_record(request, pk):
     if request.user.is_authenticated:
         record = Record.objects.get(id = pk)
         return render(request, 'single_record.html', {"record": record})
+    else:
+        messages.success(request, "You must be logged in to view this page")
+        return redirect("home")
+    
+
+# Add single record
+def add_record(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = RecordForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Record Added Successfully")
+                return redirect("home")
+        else:
+            form = RecordForm()
+            return render(request, 'add_record.html', {"form": form})
     else:
         messages.success(request, "You must be logged in to view this page")
         return redirect("home")
