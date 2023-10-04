@@ -27,10 +27,31 @@ class RecordTest(TestCase):
 # Test views
 class ProductViewTest(TestCase):
     # Test List View
-    def test_get_product_list(self):
+    def test_get_record_list(self):
         response = self.client.get('/')
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
+
+
+
+    # Test Production Creation View
+    def test_create_record_logged_in(self):
+        self.client.login(username="Ronny", password="testing321")
+        response = self.client.post('/add_record/', {
+            "first_name": "David",
+            "last_name": "Muyesi",
+            "email": "dav@gm.com",
+            "phone": "078327452",
+            "address": "3211-Caryford",
+            "city": "Caryford",
+            "state": "New Oaklands",
+            "zipcode": "02002",
+            "created_at": timezone.now(),
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "add_record.html")
+        self.assertRedirects(response, '/')
 
     
