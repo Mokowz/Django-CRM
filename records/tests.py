@@ -2,6 +2,8 @@ from django.test import TestCase
 from .models import Record
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth.models import User
+from .views import *
 
 # Create your tests here.
 # Test our model
@@ -25,7 +27,7 @@ class RecordTest(TestCase):
 
 
 # Test views
-class ProductViewTest(TestCase):
+class RecordViewTest(TestCase):
     # Test List View
     def test_get_record_list(self):
         response = self.client.get('/')
@@ -50,8 +52,35 @@ class ProductViewTest(TestCase):
             "created_at": timezone.now(),
         })
 
-        self.assertEqual(response.status_code, 200)
+        # Assert that the response is a 302 redirect code
+        self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(response, "add_record.html")
         self.assertRedirects(response, '/')
+
+    
+    # Test single record view
+    def test_get_single_record_when_logged_in(self):
+        # Create a logged-in user
+        user = User.objects.create(username="testuser", password="password")
+        self.client.login(username="testuser", password="password")
+
+        # Create a record instance
+        record = Record.objects.create(first_name="David", last_name="Muyesi", 
+                                     email="dav@gm.com", phone="078327452", 
+                                     address="3211-Caryford", city="Caryford",
+                                     state="New Oaklands", zipcode="02002",
+                                     created_at=timezone.now())
+
+        # Get the response from the view
+        response = self.client.get(f'/records/{record.pk}/')
+
+        # Assert that the response is a 200 OK status code
+        self.assertEqual(response.status_code, 200)
+
+        # Asser that it redirects you to the home page
+        self.assertRedirects('/')
+
+        # Assert that it renders to the right template
+        self.assertTemplateUsed(response, "single_record.html")
 
     
