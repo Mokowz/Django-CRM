@@ -1,8 +1,10 @@
 from django.test import TestCase
 from .models import Record
 from django.utils import timezone
+from django.urls import reverse
 
 # Create your tests here.
+# Test our model
 class RecordTest(TestCase):
 
     # Create our model instance
@@ -20,3 +22,15 @@ class RecordTest(TestCase):
         self.assertTrue(isinstance(record, Record))
         self.assertEqual(record.__str__(), 
                          record.first_name + " " + record.last_name)
+
+
+# Test views
+class ProductViewTest(TestCase):
+    # Test List View
+    def test_get_product_list(self):
+        response = self.client.get('/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home.html')
+
+    
