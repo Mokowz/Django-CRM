@@ -17,7 +17,13 @@ SECRET_KEY = "soidcjoswihecsidndoiscj"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['192.168.166.232', '127.0.0.1', '172.17.0.1']
+
+CSRF_TRUSTED_ORIGINS = [
+  'http://192.168.166.232:8001/',
+  'http://127.0.0.1:8000/',
+  'http://172.17.0.1:8001/',
+]
 
 
 # Application definition
@@ -114,7 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/home/ronny/Desktop/Standalone Sites/Django-CRM/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
