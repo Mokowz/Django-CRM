@@ -17,7 +17,8 @@ SECRET_KEY = "soidcjoswihecsidndoiscj"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.166.232', '127.0.0.1', '172.17.0.1']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['192.168.166.232', '127.0.0.1', '172.17.0.1']
 
 CSRF_TRUSTED_ORIGINS = [
   'http://192.168.166.232:8001/',

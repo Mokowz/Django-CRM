@@ -1,3 +1,6 @@
 .env
 .coverage
 venv
+
+Dockerfile
+.dockerignore
