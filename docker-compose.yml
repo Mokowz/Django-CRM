@@ -1,13 +1,14 @@
 services:
   backend:
     build: .
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app/django-crm
     depends_on:
       - db
     env_file: .env
     ports:
-      - '8000:5000'
+      - '8000:8000'
 
   db:
     image: postgres:16-alpine3.19
