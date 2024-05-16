@@ -1,9 +1,11 @@
 services:
   backend:
     build: .
-    command: >
-      bash -c "python manage.py migrate
-      && python manage.py runserver 0.0.0.0:8000"
+    # command: >
+    #   bash -c "python manage.py migrate
+    #   && python manage.py runserver 0.0.0.0:8000"
+
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app/django-crm
     depends_on:
@@ -14,13 +16,15 @@ services:
 
   db:
     image: postgres:16-alpine3.19
-    env_file: .env
+    # env_file: .env
     volumes:
       - postgres_data:/app/django-crm/postgres/data/
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_NAME=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWD}
 volumes:
   postgres_data:
 
