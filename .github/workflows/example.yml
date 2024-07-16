@@ -11,6 +11,7 @@ on:
 
 jobs:
   my_first_job:
+    name: First Job
     runs-on: ubuntu-latest
     steps:
       - name: Print a greeting
@@ -21,6 +22,7 @@ jobs:
           echo "Hello $FIRST_NAME $LAST_NAME"
 
   second_job:
+    name: Second Job
     needs: my_first_job
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +33,7 @@ jobs:
   third_job:
     name: Third Job
     runs-on: ubuntu-latest
+    needs: second_job
     steps:
       - name: Super-Linter
         uses: super-linter/super-linter@v6.7.0
