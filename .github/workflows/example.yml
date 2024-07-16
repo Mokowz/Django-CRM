@@ -1,0 +1,28 @@
+# My first github action (creating random workflows)
+name: My first Github Action workflow
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  my_first_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a greeting
+        env:
+          FIRST_NAME: Ronny
+          LAST_NAME: Mokaya
+        run: |
+          echo "Hello $FIRST_NAME $LAST_NAME"
+
+  second_job:
+    needs: my_first_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a done statement
+        run: |
+          echo "Done with running both jobs"

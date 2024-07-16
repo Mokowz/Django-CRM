@@ -18,7 +18,7 @@ services:
     image: postgres:16-alpine3.19
     # env_file: .env
     volumes:
-      - postgres_data:/app/django-crm/postgres/data/
+      - postgres_data_crm_1:/app/django-crm/postgresql/data/
     ports:
       - '5432:5432'
     environment:
@@ -26,6 +26,6 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWD}
 volumes:
-  postgres_data:
+  postgres_data_crm_1:
 
   
