@@ -36,4 +36,4 @@ jobs:
     needs: second_job
     steps:
       - name: Super-Linter
-        uses: super-linter/super-linter@v6.7.0
+        uses: super-linter/super-linter@v5.4.0
