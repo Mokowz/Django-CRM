@@ -30,6 +30,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.AWS_KEY }}" > ~/.ssh/aws_key
+          chmod 400 ~/.ssh/aws_key
 
       - name: SSH into EC2
         run: |
