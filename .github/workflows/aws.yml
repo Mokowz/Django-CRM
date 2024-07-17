@@ -23,6 +23,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create a file to store the private key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AWS_KEY }}" > ~/.ssh/aws_key
+
       - name: SSH into EC2
         run: |
-          ssh -i ${{ secrets.AWS_KEY }} ${{ secrets.AWS_USER}}@${{ secrets.AWS_HOST}} "mkdir ndani"
+          ssh -i ~/.ssh/aws_key ${{ secrets.AWS_USER}}@${{ secrets.AWS_HOST}} "mkdir ndani"
