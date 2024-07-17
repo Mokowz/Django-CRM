@@ -38,4 +38,4 @@ jobs:
 
       - name: SSH into EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/aws_key ${{ secrets.AWS_USER}}@${{ secrets.AWS_HOST}} "mkdir ndani"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/aws_key ${{ secrets.AWS_USER}}@${{ secrets.AWS_HOST}}
