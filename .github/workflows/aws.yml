@@ -34,7 +34,7 @@ jobs:
 
       - name: Securely copy file to the server
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/aws_key ../../entrypoint.sh ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }}:~
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/aws_key entrypoint.sh ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }}:~
 
       - name: SSH into EC2
         run: |
