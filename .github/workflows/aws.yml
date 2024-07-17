@@ -32,6 +32,10 @@ jobs:
           echo "${{ secrets.AWS_KEY }}" > ~/.ssh/aws_key
           chmod 400 ~/.ssh/aws_key
 
+      - name: Securely copy file to the server
+        run: |
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/aws_key ../../entrypoint.sh ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }}:~
+
       - name: SSH into EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/aws_key ${{ secrets.AWS_USER}}@${{ secrets.AWS_HOST}} "mkdir ndani"
