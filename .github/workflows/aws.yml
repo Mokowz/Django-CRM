@@ -16,3 +16,13 @@ jobs:
           echo "Host: ${{ secrets.AWS_HOST }}"
           echo "User: ${{ secrets.AWS_USER }}"
           echo "Key: ${{ secrets.AWS_KEY }}"
+
+  ssh_inside:
+    name: SSH into the server
+    needs: confirm_secrets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH into EC2
+        run: |
+          ssh -i ${{ secrets.AWS_KEY }} ${{ secrets.AWS_USER}}@${{ secrets.AWS_HOST}} "mkdir ndani"
