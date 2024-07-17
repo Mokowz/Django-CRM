@@ -29,11 +29,3 @@ jobs:
       - name: Print a done statement
         run: |
           echo "Done with running both jobs"
-
-  third_job:
-    name: Third Job
-    runs-on: ubuntu-latest
-    needs: second_job
-    steps:
-      - name: Super-Linter
-        uses: super-linter/super-linter@v5.4.0
